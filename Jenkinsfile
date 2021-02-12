@@ -5,7 +5,29 @@ pipeline {
         pollSCM('* * * * *') //polling for changes, here once a minute
     }
 
+    
+
     stages {
+
+
+        stage('build') {
+            steps {
+                script {
+                   sh './gradlew build' //Running our first build
+                }
+                
+            }
+        }
+
+        /* stage('Compile') {
+            steps {
+                script {
+                   sh './gradlew clean compile --no-daemon'
+                }
+                
+            }
+        } */
+
         stage('Unit & Integration Tests') {
             steps {
                 script {
