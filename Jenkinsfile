@@ -8,6 +8,7 @@ pipeline {
     stages {
         stage('Compile') {
             steps {
+                sh 'ls -la'
                 gradlew('clean', 'classes')
             }
         }
