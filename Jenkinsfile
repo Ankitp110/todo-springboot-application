@@ -22,7 +22,7 @@ pipeline {
         stage('Compile') {
             steps {
                 script {
-                   sh './gradlew clean compile --no-daemon' // Compiling my code
+                   sh './gradlew compileJava --no-daemon' // Compiling my code
                 }
                 
             }
