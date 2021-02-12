@@ -1,27 +1,21 @@
 pipeline {
-    agent any
 
+    agent any
     triggers {
-        pollSCM('*/5 * * * *')
+        pollSCM('* * * * *') //polling for changes, here once a minute
     }
 
     stages {
-        stage('Compile') {
+        stage('Unit & Integration Tests') {
             steps {
-                sh 'ls -la'
-                gradlew('clean', 'classes')
-            }
-        }
-        stage('Unit Tests') {
-            steps {
-                gradlew('test')
-            }
-            post {
-                always {
-                    junit '**/build/test-results/test/TEST-*.xml'
+                script {
+                    try {
+                        sh './gradlew clean test --no-daemon' //run a gradle task
+                    } finally {
+                        junit '**/build/test-results/test/*.xml' //make the junit test results available in any case (success & failure)
+                    }
                 }
             }
         }
-
     }
 }
