@@ -19,14 +19,14 @@ pipeline {
             }
         }
 
-        /* stage('Compile') {
+        stage('Compile') {
             steps {
                 script {
-                   sh './gradlew clean compile --no-daemon'
+                   sh './gradlew clean compile --no-daemon' // Compiling my code
                 }
                 
             }
-        } */
+        } 
 
         stage('Unit & Integration Tests') {
             steps {
